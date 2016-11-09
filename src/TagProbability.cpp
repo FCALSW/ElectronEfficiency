@@ -12,7 +12,6 @@
 double TagProbability::GetProbability(const TLorentzVector& electron) const {
 
   double theta = electron.Theta();
-  if(theta > TMath::PiOver2()) theta = TMath::Pi()-theta;
   theta*=1000;
 
   //we assume that we can find all electrons above 32 mrad with more than 100~GeV
@@ -32,6 +31,10 @@ double TagProbability::GetProbability(const TLorentzVector& electron) const {
 
 double TagProbability::GetProbability(double gevEnergy, double mradTheta, double degreesPhi) const {
 
+   
+  if(mradTheta > TMath::PiOver2()*1000.) mradTheta = TMath::Pi()*1000.-mradTheta;
+
+  
   //round the energy to the next lowest 100 value
   const int energy = (int(gevEnergy)/100)*100;
 
